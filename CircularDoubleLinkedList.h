@@ -15,7 +15,6 @@ public:
     Node* get(int id);
     void show();
 
-
 private:
     bool checkId(int id);
     Node* getNode(int id);
