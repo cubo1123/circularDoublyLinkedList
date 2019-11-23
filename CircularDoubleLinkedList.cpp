@@ -6,10 +6,10 @@ CircularDoubleLinkedList::CircularDoubleLinkedList()
     this->last = nullptr;
 }
 
-bool CircularDoubleLinkedList::addFirst(string data, int id)
+bool CircularDoubleLinkedList::addFirst(string data, string address, float average, int id)
 {
     if(first == nullptr){
-        return add(data,id);
+        return add(data,address,average,id);
     }
 
     if(!checkId(id)){
@@ -17,38 +17,38 @@ bool CircularDoubleLinkedList::addFirst(string data, int id)
     }
 
     if(first == last){
-        Node* n = new Node(data,id,first,last);
+        Node* n = new Node(data,address,average,id,first,last);
         this->first->setPrev(n);
         this->first->setNext(n);
         this->first = n;
         return true;
     }
 
-    Node* n = new Node(data,id,first,last);
+    Node* n = new Node(data,address,average,id,first,last);
     this->first->setPrev(n);
     this->last->setNext(n);
     this->first = n;
 }
 
-bool CircularDoubleLinkedList::add(string data, int id)
+bool CircularDoubleLinkedList::add(string data, string address, float average, int id)
 {
     if(!checkId(id)){
         return false;
     }
     if(first == nullptr){
-        Node* n = new Node(data,id,nullptr,nullptr);
+        Node* n = new Node(data,address,average,id,nullptr,nullptr);
         first = n;
         last = n;
         return true;
     }
-    Node* n = new Node(data,id,first,last);
+    Node* n = new Node(data,address,average,id,first,last);
     this->last->setNext(n);
     this->first->setPrev(n);
     this->last = n;
     return true;
 }
 
-bool CircularDoubleLinkedList::addAfter(string data, int id, int prev)
+bool CircularDoubleLinkedList::addAfter(string data, string address, float average, int id, int prev)
 {
     Node* temp = getNode(prev);
     if(temp == nullptr){
@@ -59,25 +59,24 @@ bool CircularDoubleLinkedList::addAfter(string data, int id, int prev)
     }
 
     if(temp == first){
-        Node* n = new Node(data,id,this->first->getNext(),first);
+        Node* n = new Node(data,address,average,id,this->first->getNext(),first);
         this->first->getNext()->setPrev(n);
         this->first->setNext(n);
         return true;
     }
 
     if(temp == last){
-        Node* n = new Node(data,id,first,last);
+        Node* n = new Node(data,address,average,id,first,last);
         this->last->setNext(n);
         this->first->setPrev(n);
         this->last = n;
         return true;
     }
 
-    Node* n = new Node(data,id,temp->getNext(),temp);
+    Node* n = new Node(data,address,average,id,temp->getNext(),temp);
     temp->getNext()->setPrev(n);
     temp->setNext(n);
     return true;
-
 }
 
 bool CircularDoubleLinkedList::remove(int id)
@@ -115,11 +114,13 @@ bool CircularDoubleLinkedList::remove(int id)
 
 }
 
-bool CircularDoubleLinkedList::update(int id, string data)
+bool CircularDoubleLinkedList::update(int id, string data, string address, float average)
 {
     Node* temp = getNode(id);
     if(temp){
         temp->setData(data);
+        temp->setAddress(address);
+        temp->setAverage(average);
         return true;
     }
     return false;
@@ -138,7 +139,7 @@ void CircularDoubleLinkedList::show()
 {
     Node* temp = first;
     while (temp) {
-        cout<<"Soy:"<< temp->getData() << " Next:" << temp->getNext()->getData() << " Prev:" << temp->getPrev()->getData() <<endl;
+        cout<<"Soy:"<< temp->getData()<<" Average:"<<temp->getAverage()<<" Address:"<<temp->getAddress() << " Next:" << temp->getNext()->getData() << " Prev:" << temp->getPrev()->getData() <<endl;
         if(temp->getNext() == first){
             break;
         }

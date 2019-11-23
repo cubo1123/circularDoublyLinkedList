@@ -7,7 +7,7 @@ class Node
 {
 public:
     Node();
-    Node(string data,int id,Node* next,Node* prev);
+    Node(string data,string address,float average,int id,Node* next,Node* prev);
 
     string getData() const;
     void setData(const string &value);
@@ -21,9 +21,17 @@ public:
     Node *getPrev() const;
     void setPrev(Node *value);
 
+    string getAddress() const;
+    void setAddress(const string &value);
+
+    float getAverage() const;
+    void setAverage(float value);
+
 private:
     int id;
     string data;
+    float average;
+    string address;
     Node* next;
     Node* prev;
 };

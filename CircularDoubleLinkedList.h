@@ -7,11 +7,11 @@ class CircularDoubleLinkedList
 {
 public:
     CircularDoubleLinkedList();
-    bool addFirst(string data,int id);
-    bool add(string data,int id);
-    bool addAfter(string data,int id,int prev);
+    bool addFirst(string data,string address,float average,int id);
+    bool add(string data,string address,float average,int id);
+    bool addAfter(string data,string address,float average,int id,int prev);
     bool remove(int id);
-    bool update(int id,string data);
+    bool update(int id,string data,string address, float average);
     Node* get(int id);
     void show();
 
