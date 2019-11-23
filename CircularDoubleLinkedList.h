@@ -11,8 +11,7 @@ public:
     bool add(string data,int id);
     bool addAfter(string data,int id,int prev);
     bool remove(int id);
-    Node* search(int id);
-    Node* update(int id,string data);
+    bool update(int id,string data);
     Node* get(int id);
     void show();
 

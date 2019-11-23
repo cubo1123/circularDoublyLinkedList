@@ -5,13 +5,103 @@ using namespace std;
 int main()
 {
     CircularDoubleLinkedList l;
-    l.add("uno",1);
-    l.add("dos",2);
-    l.add("tres",3);
-    l.add("cuatro",4);
-    l.add("cinco",5);
-    l.addAfter("Hail Hitler",6,3);
-    l.show();
-    cout<<"finish"<<endl;
+    int opc = 0;
+    while (opc != -1) {
+        cout<<"1.-addFirst"<<endl;
+        cout<<"2.-add"<<endl;
+        cout<<"3.-addAfter"<<endl;
+        cout<<"4.-remove"<<endl;
+        cout<<"5.-update"<<endl;
+        cout<<"6.-get"<<endl;
+        cout<<"7.-showAll"<<endl;
+        cout<<"\t-1.-Exit"<<endl;
+        int id,prev;
+        string data;
+        cin>>opc;
+        switch (opc) {
+        case 1:{
+            cout<<"ingrese el id"<<endl;
+            cin>>id;
+            cout<<"ingrese la data"<<endl;
+            cin>>data;
+            if(l.addFirst(data,id)){
+                cout<<"Agregado exitosamente"<<endl;
+            }else {
+                cout<<"No pudo ser agregado"<<endl;
+            }
+            break;
+        }
+
+        case 2:{
+            cout<<"ingrese el id"<<endl;
+            cin>>id;
+            cout<<"ingrese la data"<<endl;
+            cin>>data;
+            if(l.add(data,id)){
+                cout<<"Agregado exitosamente"<<endl;
+            }else {
+                cout<<"No pudo ser agregado"<<endl;
+            }
+            break;
+        }
+
+        case 3:{
+            cout<<"ingrese el id"<<endl;
+            cin>>id;
+            cout<<"ingrese la data"<<endl;
+            cin>>data;
+            cout<<"Ingrese el id del elemente a revasar"<<endl;
+            cin>>prev;
+            if(l.addAfter(data,id,prev)){
+                cout<<"Agregado exitosamente"<<endl;
+            }else {
+                cout<<"No pudo ser agregado"<<endl;
+            }
+            break;
+        }
+
+        case 4:{
+            cout<<"ingrese el id a eliminar"<<endl;
+            cin>>id;
+            if(l.remove(id)){
+                cout<<"Eliminado exitosamente"<<endl;
+            }else {
+                cout<<"No pudo ser eliminado"<<endl;
+            }
+            break;
+        }
+
+        case 5:{
+            cout<<"ingrese el id a actualizar"<<endl;
+            cin>>id;
+            cout<<"ingrese la data a actualizar"<<endl;
+            cin>>data;
+            if(l.update(id,data)){
+                cout<<"Actualizado exitosamente"<<endl;
+            }else {
+                cout<<"No pudo ser Actualizado"<<endl;
+            }
+            break;
+        }
+
+        case 6:{
+            cout<<"ingrese el id a mostrar"<<endl;
+            cin>>id;
+            Node* temp = l.get(id);
+            if(temp){
+                cout<<"Data:"<< temp->getData() <<"Id:"<<temp->getId()<< " Next:" << temp->getNext()->getData() << " Prev:" << temp->getPrev()->getData() <<endl;
+            }else {
+                cout<<"No puede ser mostrado"<<endl;
+            }
+            break;
+        }
+        case 7:{
+            l.show();
+            break;
+        }
+        default:
+            break;
+        }
+    }
     return 0;
 }
